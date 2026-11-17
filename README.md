@@ -4,7 +4,9 @@ Snow that falls on your website and piles up on your buttons, cards and images.
 
 Add one line. It needs no setup and has no dependencies. Give it two dates and it turns itself on for the holidays and off again afterwards, every year.
 
-![Snow piling up on the buttons and the code block of a dark web page](docs/preview.png)
+**[Try it live](https://vedas-dixit.github.io/Snofetti/)** · [npm](https://www.npmjs.com/package/snofetti) · [GitHub](https://github.com/vedas-dixit/Snofetti)
+
+[![Snow piling up on the buttons and the code block of a dark web page](https://raw.githubusercontent.com/vedas-dixit/Snofetti/main/docs/preview.png)](https://vedas-dixit.github.io/Snofetti/)
 
 - **Piles up on your page.** Snow settles on real elements, grows over time, and falls off when you press a button or shake a window.
 - **Works on real websites.** It follows scrolling and sticky headers, hides under dialogs and menus, and matches light and dark pages.
@@ -25,6 +27,8 @@ Paste this before `</body>`:
 That is all. Snow falls from 1 December to 6 January. Leave the two dates out and it snows all year.
 
 ### With npm
+
+The package is [snofetti on npm](https://www.npmjs.com/package/snofetti).
 
 ```sh
 npm install snofetti
@@ -150,7 +154,7 @@ snofetti({ target: '.card, .button' });
 
 | `real` (default) | `crystal` | `soft` |
 | :---: | :---: | :---: |
-| ![Realistic style](docs/style-real.png) | ![Crystal style](docs/style-crystal.png) | ![Soft style](docs/style-soft.png) |
+| ![Realistic style](https://raw.githubusercontent.com/vedas-dixit/Snofetti/main/docs/style-real.png) | ![Crystal style](https://raw.githubusercontent.com/vedas-dixit/Snofetti/main/docs/style-crystal.png) | ![Soft style](https://raw.githubusercontent.com/vedas-dixit/Snofetti/main/docs/style-soft.png) |
 | Powder snow, lit and shaded like the real thing. | The same snow with sharp, glassy edges, small icicles and coloured glints. | A smooth illustrated cap. Suits flat, playful designs. |
 
 ```js
@@ -248,7 +252,7 @@ This is version 0.1. Known gaps:
 
 ## Using an AI coding agent
 
-The repository includes a skill file at [`skills/snofetti/SKILL.md`](skills/snofetti/SKILL.md). It tells an agent how to add Snofetti to a project: where the one line goes in each framework, how to choose the elements, and how to set the season. Point your agent at that file and ask it to add snow to your site.
+The repository includes a skill file at [`skills/snofetti/SKILL.md`](https://github.com/vedas-dixit/Snofetti/blob/main/skills/snofetti/SKILL.md). The same file comes with the npm package, at `node_modules/snofetti/skills/snofetti/SKILL.md`. It tells an agent how to add Snofetti to a project: where the one line goes in each framework, how to choose the elements, and how to set the season. Point your agent at that file and ask it to add snow to your site.
 
 ## Development
 
@@ -277,4 +281,4 @@ src/
 
 ## Licence
 
-MIT
+[MIT](https://github.com/vedas-dixit/Snofetti/blob/main/LICENSE)
