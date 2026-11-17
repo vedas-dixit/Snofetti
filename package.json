@@ -1,0 +1,71 @@
+{
+  "name": "snofetti",
+  "version": "0.1.0",
+  "description": "Snow that falls on your website and piles up on your buttons and cards. One line, no dependencies.",
+  "keywords": [
+    "snow",
+    "snowfall",
+    "christmas",
+    "winter",
+    "holiday",
+    "canvas",
+    "animation",
+    "effect",
+    "react"
+  ],
+  "license": "MIT",
+  "author": "vedas-dixit",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/snofetti.global.js",
+  "jsdelivr": "./dist/snofetti.global.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./auto": {
+      "types": "./dist/auto.d.ts",
+      "import": "./dist/auto.js",
+      "require": "./dist/auto.cjs"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js",
+      "require": "./dist/react.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "skills"
+  ],
+  "sideEffects": [
+    "./dist/auto.js",
+    "./dist/auto.cjs",
+    "./dist/snofetti.global.js"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "node scripts/test.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "peerDependencies": {
+    "react": ">=17"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "esbuild": "^0.28.2",
+    "typescript": "^7.0.2"
+  }
+}
