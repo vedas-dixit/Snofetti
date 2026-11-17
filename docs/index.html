@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Snofetti on any website</title>
+<meta name="description" content="Drag a button to your bookmarks bar and make it snow on any website.">
+<style>
+  :root { --page: #0d1424; --panel: #18213a; --ink: #eef2fa; --muted: #9aa6bd; --line: #2a3554; --accent: #c9372c; --soft: #222d4a; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--page); color: var(--ink); font: 17px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 88px 24px 96px; }
+  h1 { font-size: clamp(34px, 6vw, 54px); line-height: 1.08; letter-spacing: -0.03em; margin: 0 0 16px; }
+  h2 { font-size: 22px; letter-spacing: -0.01em; margin: 64px 0 12px; }
+  p { margin: 0 0 16px; color: var(--muted); }
+  a { color: inherit; }
+  .lead { font-size: 20px; max-width: 560px; }
+
+  .buttons { display: flex; flex-wrap: wrap; gap: 44px 18px; margin: 64px 0 20px; }
+  .bookmark { display: inline-block; padding: 13px 24px; border-radius: 999px; background: var(--accent); color: #fff5f4; font-weight: 600; text-decoration: none; cursor: grab; }
+  .bookmark.plain { background: var(--soft); color: var(--ink); }
+  .bookmark[aria-disabled="true"] { opacity: 0.45; cursor: progress; }
+  .note { font-size: 15px; }
+
+  ol { margin: 0; padding: 0; list-style: none; counter-reset: step; }
+  ol li { counter-increment: step; position: relative; padding: 0 0 14px 44px; color: var(--muted); }
+  ol li::before { content: counter(step); position: absolute; left: 0; top: 1px; width: 28px; height: 28px; border-radius: 50%; background: var(--soft); color: var(--ink); font-size: 14px; font-weight: 600; display: grid; place-items: center; }
+  ol li strong, p strong { color: var(--ink); font-weight: 600; }
+  kbd { font: 13px/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace; background: var(--soft); border: 1px solid var(--line); border-radius: 6px; padding: 3px 6px; color: var(--ink); }
+
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 24px 26px; margin-top: 40px; }
+  .panel h2 { margin-top: 0; }
+  pre { margin: 0 0 12px; padding: 14px 16px; border-radius: 12px; background: #070b16; color: #cfd9ec; overflow-x: auto; font: 13px/1.6 ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  footer { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 15px; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Make it snow on any website</h1>
+  <p class="lead">Drag a button to your bookmarks bar. Then open any site and click it. The snow piles up on the buttons, cards and images it finds there.</p>
+
+  <div class="buttons" data-snow="off">
+    <a class="bookmark" data-style="real" href="#" aria-disabled="true">Snofetti</a>
+    <a class="bookmark plain" data-style="crystal" href="#" aria-disabled="true">Snofetti crystal</a>
+    <a class="bookmark plain" data-style="soft" href="#" aria-disabled="true">Snofetti soft</a>
+  </div>
+  <p class="note" id="status">Getting the buttons ready…</p>
+
+  <h2>How to use it</h2>
+  <ol>
+    <li><strong>Show your bookmarks bar.</strong> Press <kbd>Cmd</kbd> <kbd>Shift</kbd> <kbd>B</kbd> on a Mac, or <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>B</kbd> on Windows.</li>
+    <li><strong>Drag one of the buttons above onto the bar.</strong> Each button is a different style. You can add all three.</li>
+    <li><strong>Open any website and click the bookmark.</strong> Click it again to turn the snow off. Click another style to switch.</li>
+  </ol>
+  <p>You can also click a button right here to see that style on this page.</p>
+  <p>Only your own browser is affected. Reloading a page brings it back to normal.</p>
+
+  <div class="panel">
+    <h2>No bookmarks bar?</h2>
+    <p>Open the browser console on the site and paste this line. It works on many sites, but some, such as YouTube and GitHub, block it. The bookmark buttons work there.</p>
+    <pre>import('https://cdn.jsdelivr.net/npm/snofetti/+esm').then(m => snow = m.snofetti())</pre>
+  </div>
+
+  <div class="panel">
+    <h2>Want it on your own site?</h2>
+    <p>One line adds Snofetti to a website for all its visitors. It can turn itself on for the holidays and off again afterwards.</p>
+    <pre>&lt;script defer src="https://cdn.jsdelivr.net/npm/snofetti"
+        data-from="12-01" data-until="01-06"&gt;&lt;/script&gt;</pre>
+    <p style="margin:0"><a href="https://github.com/vedas-dixit/Snofetti">Read the guide on GitHub</a> or <a href="https://www.npmjs.com/package/snofetti">get it from npm</a>.</p>
+  </div>
+
+  <footer>Snofetti is free and open source, under the MIT licence.</footer>
+</main>
+
+<script defer src="https://cdn.jsdelivr.net/npm/snofetti" data-prefill="0.6"></script>
+<script>
+  const LIBRARY = 'https://cdn.jsdelivr.net/npm/snofetti/dist/snofetti.global.js';
+  const links = document.querySelectorAll('.bookmark');
+  const status = document.getElementById('status');
+
+  // A bookmark has to carry the whole library, because many sites refuse to load
+  // scripts from another address. Clicking it a second time turns the snow off.
+  const wrap = (library, style) =>
+    `(function(){var s='${style}',w=window;if(!w.snofetti){${library}\n}` +
+    `if(w.snofettiStyle===s){w.snofetti().stop();w.snofettiStyle=null}` +
+    `else{w.snofetti({style:s});w.snofettiStyle=s}})()`;
+
+  const toUrl = (code) =>
+    'javascript:' + code.replace(/[%#"<>`\s]/g, (ch) => '%' + ch.charCodeAt(0).toString(16).toUpperCase().padStart(2, '0'));
+
+  fetch(LIBRARY)
+    .then((reply) => (reply.ok ? reply.text() : Promise.reject(new Error(reply.status))))
+    .then((library) => {
+      for (const link of links) {
+        link.href = toUrl(wrap(library, link.dataset.style));
+        link.removeAttribute('aria-disabled');
+      }
+      status.textContent = 'The buttons are ready. Drag one to your bookmarks bar.';
+    })
+    .catch(() => {
+      status.textContent = 'The buttons could not be loaded. Check your connection and reload this page.';
+    });
+</script>
+</body>
+</html>

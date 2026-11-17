@@ -99,6 +99,30 @@ onUnmounted(() => snow?.stop());
 
 Calling `snofetti()` on a server is safe. It does nothing there.
 
+## Try it on any website
+
+You can see Snofetti on a site without changing its code.
+
+**With a bookmark.** Open [vedas-dixit.github.io/Snofetti](https://vedas-dixit.github.io/Snofetti/) and drag one of the three buttons to your bookmarks bar. Then open any website and click the bookmark. Click it again to turn the snow off. This works on sites that block outside scripts, such as YouTube and GitHub, because the bookmark carries the whole library with it.
+
+**With the console.** Open the browser console on the site (`Cmd+Option+J` on a Mac, `Ctrl+Shift+J` on Windows), paste one line and press Enter.
+
+```js
+import('https://cdn.jsdelivr.net/npm/snofetti/+esm').then(m => snow = m.snofetti({ style: 'real' }))
+```
+
+```js
+import('https://cdn.jsdelivr.net/npm/snofetti/+esm').then(m => snow = m.snofetti({ style: 'crystal' }))
+```
+
+```js
+import('https://cdn.jsdelivr.net/npm/snofetti/+esm').then(m => snow = m.snofetti({ style: 'soft' }))
+```
+
+Paste another line to switch style. Then try `snow.shake()`, or `snow.stop()` to remove it. Some sites do not allow scripts from other addresses, and there the line does nothing. Use the bookmark on those.
+
+Either way, only your own browser is affected, and a reload brings the page back to normal.
+
 ## Where the snow lands
 
 **By default, Snofetti chooses for you.** It looks for elements with a visible box of their own, such as buttons, cards, images and code blocks, and lets snow settle on them.

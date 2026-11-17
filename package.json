@@ -15,6 +15,14 @@
   ],
   "license": "MIT",
   "author": "vedas-dixit",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vedas-dixit/Snofetti.git"
+  },
+  "homepage": "https://github.com/vedas-dixit/Snofetti#readme",
+  "bugs": {
+    "url": "https://github.com/vedas-dixit/Snofetti/issues"
+  },
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
